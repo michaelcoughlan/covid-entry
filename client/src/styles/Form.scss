@@ -1,0 +1,68 @@
+.ceph__form-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.ceph__form {
+    width: 100%;
+}
+
+.ceph__form-group {
+    width: 100%;
+    position: relative;
+    height: 50px;
+    margin: 2rem 0;
+    overflow: hidden;
+}
+
+.ceph__form-group input {
+    /* Make .ceph__input the size of the form */
+    width: 100%;
+    height: 100%;
+    color: #2e2e2e;
+    padding-top: 20px;
+    border: none;
+    outline: none;
+}
+
+.ceph__form-group label {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid #000000;
+}
+
+.ceph__form-group label::after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: -1px;
+    height: 100%;
+    width: 100%;
+    border-bottom: 3px solid #5fa8d3;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.ceph__content-name {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+.ceph__form-group input:focus + .ceph__label-name .ceph__content-name,
+.ceph__form-group input:valid + .ceph__label-name .ceph__content-name {
+    transform: translateY(-150%);
+    font-size: 14px;
+    color: #5fa8d3;
+}
+
+.ceph__form-group input:focus + .ceph__label-name::after,
+.ceph__form-group input:valid + .ceph__label-name::after {
+    transform: translateX(0%);
+}

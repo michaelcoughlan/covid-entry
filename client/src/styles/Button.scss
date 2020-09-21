@@ -1,0 +1,15 @@
+.ceph__btn {
+    width: 200px;
+    height: 50px;
+    background-color: #5fa8d3;
+    border: 1px solid #5fa8d3;
+    border-radius: 3px;
+    color: #ffffff;
+    font-weight: $fontBold;
+    transition: all 0.25s ease;
+
+    &:disabled {
+        background-color: #b6b6b6;
+        border: 1px solid #b6b6b6;
+    }
+}

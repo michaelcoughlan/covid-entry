@@ -1,0 +1,55 @@
+version: "3.8"
+
+networks: 
+  cephalopod-network:
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_DATABASE=pubs
+      - MYSQL_USER=cephalopod
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks: 
+      - cephalopod-network
+  server:
+    image: node:latest
+    restart: always
+    command: npm run start:dev
+    working_dir: /app
+    ports: 
+      - 8000:8000
+    environment:
+      - DB_NAME=pubs
+      - DB_USER=cephalopod
+      - DB_PASSWORD=secret
+      - DB_PORT=3306
+      - DB_TYPE=mysql
+      - FRONTEND_URL=http://localhost:3000
+      - PORT=8000
+    volumes:
+      - ./server:/app
+    networks: 
+      - cephalopod-network
+    depends_on:
+      - db
+  client:
+    image: node:latest
+    restart: always
+    command: npm start
+    working_dir: /app
+    ports: 
+      - 3000:3000
+    environment:
+      - CI=true
+      - REACT_APP_API_URL=http://localhost:8000/api
+    volumes:
+      - ./client:/app
+    networks: 
+      - cephalopod-network
