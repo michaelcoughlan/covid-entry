@@ -7,7 +7,3 @@ npm run build
 
 # Move the production build to the server side
 mv build ../server/public
-
-# Change directory to the server and run the build command
-cd ../server
-npm run build
