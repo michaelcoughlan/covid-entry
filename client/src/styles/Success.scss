@@ -1,0 +1,15 @@
+.ceph__success {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ceph__success-icon {
+    height: 150px;
+    width: 150px;
+    background-image: url('../assets/tick.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+}

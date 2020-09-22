@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 @import './variables.scss';
+@import './shared.scss';
 @import './Button.scss';
 @import './Form.scss';
 @import './Navbar.scss';
+@import './Success.scss';
 
 * {
     font-family: 'Roboto', sans-serif;
@@ -13,6 +15,7 @@
 }
 
 .ceph__container {
+    height: 100%;
     width: 80%;
     margin: 0 auto;
 }

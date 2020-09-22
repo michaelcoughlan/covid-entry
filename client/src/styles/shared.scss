@@ -1,0 +1,23 @@
+.ceph__text {
+    margin: 0.5rem;
+
+    &.lg {
+        font-size: $fontLg;
+        font-weight: $fontBold;
+    }
+
+    &.md {
+        font-size: $fontMd;
+        font-weight: $fontLight;
+    }
+
+    &.error {
+        color: $red;
+        font-size: $fontMd;
+        font-weight: $fontBold;
+    }
+}
+
+.ceph__bold {
+    font-weight: $fontBold;   
+}

@@ -1,12 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const entriesController = require('../controllers').entries;
 
-router.post('/', (req, res, next) => {
-    if (!req.body.email || !req.body.name || !req.body.phoneNumber) {
-        return res.status(400).json({ error: 'Bad request, missing fields.' });
-    }
-
-    res.send('Thanks!')
-});
+router.post('/', entriesController.create);
 
 module.exports = router;

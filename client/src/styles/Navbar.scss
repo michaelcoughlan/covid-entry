@@ -4,6 +4,15 @@
     padding: 0 1rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     font-weight: $fontLight;
-    font-size: $fontLg;
+
+    div {
+        font-size: $fontLg;
+    }
+
+    a {
+        text-decoration: none;
+        color: #020202;
+    }
 }
