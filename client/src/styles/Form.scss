@@ -8,6 +8,7 @@
     width: 100%;
 }
 
+// TEXT / NUMBER INPUT
 .ceph__form-group {
     width: 100%;
     position: relative;
@@ -20,7 +21,7 @@
     /* Make .ceph__input the size of the form */
     width: 100%;
     height: 100%;
-    color: #2e2e2e;
+    color: $black;
     padding-top: 20px;
     border: none;
     outline: none;
@@ -33,7 +34,7 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid $black;
 }
 
 .ceph__form-group label::after {
@@ -43,7 +44,7 @@
     bottom: -1px;
     height: 100%;
     width: 100%;
-    border-bottom: 3px solid #5fa8d3;
+    border-bottom: 3px solid $blue;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
 }
@@ -59,10 +60,73 @@
 .ceph__form-group input:valid + .ceph__label-name .ceph__content-name {
     transform: translateY(-150%);
     font-size: 14px;
-    color: #5fa8d3;
+    color: $blue;
 }
 
 .ceph__form-group input:focus + .ceph__label-name::after,
 .ceph__form-group input:valid + .ceph__label-name::after {
     transform: translateX(0%);
 }
+
+// CHECKBOX
+.ceph__checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px; // move the text past the checkbox
+    margin: 1rem 0;
+    cursor: pointer;
+    font-size: $fontMd;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+  
+/* Hide the browser's default checkbox */
+.ceph__checkbox-container input {
+    display: none;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+/* Create a custom checkbox */
+.ceph__checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px; // slightly smaller than the padding-left to create spacing
+    background-color: $grey;
+}
+  
+.ceph__checkbox-container input:checked ~ .ceph__checkmark {
+    background-color: $blue; // background for the checked input
+}
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .ceph__checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .ceph__checkbox-container input:checked ~ .ceph__checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .ceph__checkbox-container .ceph__checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid $white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }

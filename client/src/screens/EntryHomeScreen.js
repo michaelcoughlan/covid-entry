@@ -13,16 +13,18 @@ import api from '../consts/api';
 
 // Redux
 import { setEntry } from '../redux/actions';
+import Checkbox from '../components/Checkbox';
 
 const EntryHomeScreen = ({ match, setEntry }) => {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [redirectTo, setRedirectTo] = useState('');
 
     const isFormValid = () => {
-        if (!name) {
+        if (!name || !isChecked) {
             return false;
         }
 
@@ -61,11 +63,18 @@ const EntryHomeScreen = ({ match, setEntry }) => {
         <div className="ceph__form-container">
             <form className="ceph__form">
                 <QuestionList />
-                <Input label="Name *" onChangeHandler={(event) => { setName(event.target.value); setError(''); }} isRequired={true} type="text" value={name} />
+
+                <p className="ceph__text md">Please fill in your name and at least one of the contact fields so we can inform you of any Coronavirus cases.</p>
+
+                <Input label="Name" onChangeHandler={(event) => { setName(event.target.value); setError(''); }} isRequired={true} type="text" value={name} />
                 <Input label="Email" onChangeHandler={(event) => { setEmail(event.target.value); setError(''); }} isRequired={true} type="text" value={email} />
                 <Input label="Phone Number" onChangeHandler={(event) => { setPhoneNumber(event.target.value); setError(''); }} isRequired={true} type="number" value={phoneNumber} />
 
                 { error && <p className="ceph__text error">{error}</p> }
+
+                <p className="ceph__text md">Your data will be deleted after the mandatory retention period.</p>
+
+                <Checkbox label="I agree with the privacy policy" onChangeHandler={(event) => setIsChecked(event.target.checked)} value={isChecked} />
 
                 <Button clickHandler={handleFormSubmission} disabled={!isFormValid()} text="SUBMIT" />
             </form>
