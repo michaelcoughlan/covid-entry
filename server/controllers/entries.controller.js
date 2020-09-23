@@ -1,7 +1,7 @@
 const Entry = require('../database/models').Entry;
 
 module.exports = {
-    create(req, res) {
+    createEntry(req, res) {
         const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         const { email, name, phoneNumber, uid } = req.body;
 

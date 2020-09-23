@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropType from 'prop-types';
+
+// Components
 import Button from '../components/Button';
 import Input from '../components/Input';
+import QuestionList from '../components/QuestionList';
+
+// Consts
 import api from '../consts/api';
+
+// Redux
 import { setEntry } from '../redux/actions';
-import { Redirect } from 'react-router-dom';
 
 const EntryHomeScreen = ({ match, setEntry }) => {
     const [email, setEmail] = useState('');
@@ -53,6 +60,7 @@ const EntryHomeScreen = ({ match, setEntry }) => {
     return (
         <div className="ceph__form-container">
             <form className="ceph__form">
+                <QuestionList />
                 <Input label="Name *" onChangeHandler={(event) => { setName(event.target.value); setError(''); }} isRequired={true} type="text" value={name} />
                 <Input label="Email" onChangeHandler={(event) => { setEmail(event.target.value); setError(''); }} isRequired={true} type="text" value={email} />
                 <Input label="Phone Number" onChangeHandler={(event) => { setPhoneNumber(event.target.value); setError(''); }} isRequired={true} type="number" value={phoneNumber} />
