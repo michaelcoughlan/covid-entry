@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropType from 'prop-types';
@@ -6,7 +6,7 @@ import PropType from 'prop-types';
 // Components
 import Button from '../components/Button';
 import Input from '../components/Input';
-import QuestionList from '../components/QuestionList';
+import Question from '../components/Question';
 
 // Consts
 import api from '../consts/api';
@@ -21,7 +21,26 @@ const EntryHomeScreen = ({ match, setEntry }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [questions, setQuestions] = useState([]);
     const [redirectTo, setRedirectTo] = useState('');
+
+    useEffect(() => {
+        fetchQuestions();
+    }, [])
+
+    const fetchQuestions = () => {
+        api.get('questions')
+        .then((questionsResponse) => setQuestions(questionsResponse.data))
+        .catch((error) => {
+            if (error.response) {
+                console.log(error.response);
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log(error);
+            }
+        })
+    };
 
     const isFormValid = () => {
         if (!name || !isChecked) {
@@ -62,7 +81,17 @@ const EntryHomeScreen = ({ match, setEntry }) => {
     return (
         <div className="ceph__form-container">
             <form className="ceph__form">
-                <QuestionList />
+                <div className="ceph__questions-container">
+                    {
+                        questions.map((question) => {
+                            return (
+                                <Fragment key={question.id}>
+                                    <Question question={question} />
+                                </Fragment>
+                            );
+                        })
+                    }
+                </div>
 
                 <p className="ceph__text md">Please fill in your name and at least one of the contact fields so we can inform you of any Coronavirus cases.</p>
 
@@ -70,11 +99,12 @@ const EntryHomeScreen = ({ match, setEntry }) => {
                 <Input label="Email" onChangeHandler={(event) => { setEmail(event.target.value); setError(''); }} isRequired={true} type="text" value={email} />
                 <Input label="Phone Number" onChangeHandler={(event) => { setPhoneNumber(event.target.value); setError(''); }} isRequired={true} type="number" value={phoneNumber} />
 
+                <div className="ceph__footer-container">
+                    <p className="ceph__text md">Your data will be deleted after the mandatory retention period.</p>
+                    <Checkbox label="I agree with the privacy policy" onChangeHandler={(event) => setIsChecked(event.target.checked)} value={isChecked} />
+                </div>
+
                 { error && <p className="ceph__text error">{error}</p> }
-
-                <p className="ceph__text md">Your data will be deleted after the mandatory retention period.</p>
-
-                <Checkbox label="I agree with the privacy policy" onChangeHandler={(event) => setIsChecked(event.target.checked)} value={isChecked} />
 
                 <Button clickHandler={handleFormSubmission} disabled={!isFormValid()} text="SUBMIT" />
             </form>

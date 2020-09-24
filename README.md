@@ -1,4 +1,4 @@
-# Cephalopod Pub Entry
+# COVID Entry
 
 ## Running the application (with Docker)
 

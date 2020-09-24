@@ -13,7 +13,7 @@
     width: 100%;
     position: relative;
     height: 50px;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     overflow: hidden;
 }
 
@@ -69,6 +69,11 @@
 }
 
 // CHECKBOX
+.ceph__footer-container {
+    margin-top: 2rem;
+    margin: 1.5rem 0;
+}
+
 .ceph__checkbox-container {
     display: block;
     position: relative;
@@ -106,20 +111,20 @@
     background-color: $blue; // background for the checked input
 }
   
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .ceph__checkmark:after {
+/* Create the checkmark/indicator (hidden when not checked) */
+.ceph__checkmark:after {
     content: "";
     position: absolute;
     display: none;
-  }
+}
   
-  /* Show the checkmark when checked */
-  .ceph__checkbox-container input:checked ~ .ceph__checkmark:after {
+/* Show the checkmark when checked */
+.ceph__checkbox-container input:checked ~ .ceph__checkmark:after {
     display: block;
-  }
+}
   
-  /* Style the checkmark/indicator */
-  .ceph__checkbox-container .ceph__checkmark:after {
+/* Style the checkmark/indicator */
+.ceph__checkbox-container .ceph__checkmark:after {
     left: 9px;
     top: 5px;
     width: 5px;
@@ -129,4 +134,69 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
+}
+
+.ceph__questions-container {
+    margin: 1rem 0 2rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $black;
+}
+
+// Radio buttons
+.ceph__radio-container {
+    margin: 1rem 0;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    display: none; // hide the default 
+}
+
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+    position: relative;
+    padding-left: 35px; // push the text out
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: $black;
+}
+
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid $grey;
+    border-radius: 100%;
+    background: $white;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: $blue;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}

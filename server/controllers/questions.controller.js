@@ -20,7 +20,7 @@ module.exports = {
 
             res.status(201).send(questionResponse)
         })
-        .catch((error) => {console.log(error); res.status(500).send(error)});
+        .catch((error) => res.status(500).send(error));
     },
     getQuestions(req, res) {
         Question.findAll({
