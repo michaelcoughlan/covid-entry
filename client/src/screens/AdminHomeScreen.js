@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { login } from '../redux/actions';
+import { login, resetPassword } from '../redux/actions';
 import Button from '../components/Button';
 import Input from '../components/Input';
 
-const AdminHomeScreen = ({ login }) => {
+const AdminHomeScreen = ({ login, resetPassword }) => {
     const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
+    const [error] = useState('');
     const [password, setPassword] = useState('');
 
     const isFormValid = () => !email || !password;
 
-    useEffect(() => {
-        // console.log(firebase.fb.getUser());
-    }, [])
-
     const handleSignInSubmission = (event) => {
         event.preventDefault();
         login(email, password);
-        // firebase.fb.signIn(email, password).then(userResponse => login(userResponse));
     };
 
-    const handleSignUpSubmission = (event) => {
+    const handleForgotPassword = (event) => {
         event.preventDefault();
-        // firebase.fb.signUp(email, password).then(userResponse => login(userResponse));
+        resetPassword(email);
     };
 
     return (
@@ -35,7 +30,7 @@ const AdminHomeScreen = ({ login }) => {
 
             <div>
                 <Button clickHandler={handleSignInSubmission} disabled={isFormValid()} text="SIGN IN" />
-                <Button clickHandler={handleSignUpSubmission} disabled={isFormValid()} text="SIGN UP" />
+                <Button clickHandler={handleForgotPassword} disabled={isFormValid()} text="SIGN UP" />
             </div>
 
             <p className="ceph__text error">{error}</p>
@@ -43,14 +38,11 @@ const AdminHomeScreen = ({ login }) => {
     );
 };
 
-const mapStateToProps = state => ({
-    user: state.authReducer.user,
-});
-
 const mapDispatchToProps = dispatch => {
     return {
         login: (email, password) => dispatch(login(email, password)),
+        resetPassword: (email) => dispatch(resetPassword(email)),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminHomeScreen);
+export default connect(null, mapDispatchToProps)(AdminHomeScreen);

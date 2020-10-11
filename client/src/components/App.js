@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { checkSession } from '../redux/actions';
@@ -25,11 +25,17 @@ const App = ({ checkSession, isLoading, user }) => {
             <Navbar />
             <div className="ceph__container">
                 <Switch>
-                    <Route exact path="/entries/:uid" component={EntryHomeScreen} />
-                    <Route exact path="/entries/:uid/success" component={EntrySuccessScreen} />
+                    <Route exact path={`/entries/${process.env.REACT_APP_PUB_ID}`} component={EntryHomeScreen} />
+                    <Route exact path={`/entries/${process.env.REACT_APP_PUB_ID}/success`} component={EntrySuccessScreen} />
                     <Route exact path="/admin" component={AdminHomeScreen} />
-                    { user && <Route exact path="/admin/dashboard" component={AdminDashboard} /> }
-                    <Redirect to="/entries/:uid" />
+                    {
+                        user &&
+                        <Fragment>
+                            <Route exact path={`/admin/${process.env.REACT_APP_PUB_ID}/dashboard`} component={AdminDashboard} />
+                            <Redirect to={`/admin/${process.env.REACT_APP_PUB_ID}/dashboard`} />
+                        </Fragment>
+                    }
+                    <Redirect to={`/entries/${process.env.REACT_APP_PUB_ID}`} />
                 </Switch>
             </div>
         </HashRouter>

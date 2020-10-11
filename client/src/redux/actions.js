@@ -1,4 +1,4 @@
-import { CHECK_SESSION, LOGIN, LOGOUT, SET_ENTRY } from './actionTypes';
+import { CHECK_SESSION, LOGIN, LOGOUT, RESET_PASSWORD, SET_ENTRY } from './actionTypes';
 import firebase from '../config/firebase.config';
 
 export const checkSession = () => {
@@ -25,10 +25,23 @@ export const login = (email, password) => {
     };
 }
 
-export const logout = () => ({
-    type: LOGOUT,
-    payload: null,
-});
+export const resetPassword = (email) => {
+    return async (dispatch, getState) => {
+        const userResponse = await firebase.auth().sendPasswordResetEmail(email);
+        console.log(userResponse);
+
+        dispatch({
+            type: RESET_PASSWORD,
+        });
+    };
+}
+
+export const logout = () => {
+    return (dispatch, getState) => {
+        firebase.auth().signOut()
+        .then(() => dispatch({ type: LOGOUT }))
+    };
+}
 
 export const setEntry = (entry) => ({
     type: SET_ENTRY,

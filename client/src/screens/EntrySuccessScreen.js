@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import months from '../consts/months';
 
-const EntrySuccessScreen = ({ entry, match }) => {
+const EntrySuccessScreen = ({ entry }) => {
     if (!entry) {
-        return <Redirect to={`/entries/${match.params.uid}`} />
+        return <Redirect to={`/entries/${process.env.REACT_APP_PUB_ID}`} />
     }
 
     const date = new Date(entry.created_at).getDate();
@@ -26,12 +26,10 @@ const EntrySuccessScreen = ({ entry, match }) => {
 
 EntrySuccessScreen.propTypes = {
     entry: PropType.object,
-    match: PropType.object,
 };
 
 EntrySuccessScreen.defaultProps = {
     entry: {},
-    match: {},
 };
 
 const mapStateToProps = state => ({

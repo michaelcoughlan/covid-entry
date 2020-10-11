@@ -15,7 +15,7 @@ import api from '../consts/api';
 import { setEntry } from '../redux/actions';
 import Checkbox from '../components/Checkbox';
 
-const EntryHomeScreen = ({ match, setEntry }) => {
+const EntryHomeScreen = ({ setEntry }) => {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
     const [isChecked, setIsChecked] = useState(false);
@@ -57,10 +57,10 @@ const EntryHomeScreen = ({ match, setEntry }) => {
     const handleFormSubmission = (event) => {
         event.preventDefault();
 
-        api.post('/entries', { name, email, phoneNumber, uid: match.params.uid })
+        api.post('/entries', { name, email, phoneNumber, uid: process.env.REACT_APP_PUB_ID })
         .then(res => {
             setEntry(res.data);
-            setRedirectTo(`/entries/${match.params.uid}/success`);
+            setRedirectTo(`/entries/${process.env.REACT_APP_PUB_ID}/success`);
         })
         .catch(error => {
             if (error.response) {
@@ -113,12 +113,10 @@ const EntryHomeScreen = ({ match, setEntry }) => {
 };
 
 EntryHomeScreen.propTypes = {
-    match: PropType.object,
     setEntry: PropType.func,
 };
 
 EntryHomeScreen.defaultProps = {
-    match: {},
     setEntry: () => {},
 };
 
