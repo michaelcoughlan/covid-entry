@@ -8,7 +8,7 @@
 
 ## Running the application (without Docker)
 
-If you are running the front and backend without Docker, ensure that you have `.env` files in the client and server directories. An example can be found in the `.env.example` files.
+If you are running the front and backend without Docker, ensure that you have the `.env` file filled in. An example can be found in the `.env.example` files.
 
 ### Frontend
 
