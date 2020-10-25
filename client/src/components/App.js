@@ -27,7 +27,7 @@ const App = ({ checkSession, isLoading, user }) => {
                 <Switch>
                     <Route exact path={`/entries/${process.env.REACT_APP_PUB_ID}`} component={EntryHomeScreen} />
                     <Route exact path={`/entries/${process.env.REACT_APP_PUB_ID}/success`} component={EntrySuccessScreen} />
-                    <Route exact path="/admin" component={AdminHomeScreen} />
+                    <Route exact path={`/admin/${process.env.REACT_APP_PUB_ID}`} component={AdminHomeScreen} />
                     {
                         user &&
                         <Fragment>

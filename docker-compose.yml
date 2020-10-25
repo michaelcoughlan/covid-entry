@@ -25,16 +25,9 @@ services:
     working_dir: /app
     ports: 
       - 8000:8000
+    env_file: .env
     environment:
-      - DB_HOST=db
-      - DB_NAME=pubs
-      - DB_USER=cephalopod
-      - DB_PASSWORD=secret
-      - DB_PORT=3306
-      - DB_TYPE=mysql
-      - FRONTEND_URL=http://localhost:3000
       - PORT=8000
-      - PUB_UID=test
     volumes:
       - ./server:/app
     networks: 
@@ -49,7 +42,7 @@ services:
     ports: 
       - 3000:3000
     env_file: 
-      - ./.env
+      - .env
     volumes:
       - ./client:/app
     networks: 

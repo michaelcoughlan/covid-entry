@@ -12,7 +12,7 @@ const  Navbar = ({ logout, user }) => {
             {
                 user
                 ?   <p onClick={logout}>Logout</p>
-                :   <p><Link to="/admin">Admin</Link></p>
+                :   <p><Link to={`/admin/${process.env.REACT_APP_PUB_ID}`}>Admin</Link></p>
             }
         </nav>
     );
