@@ -1,5 +1,9 @@
 # COVID Entry
 
+## Description
+
+Practice application to allow restaurants / bars to generate a QR code for customers to scan and provide a way of contacting them in the case of a positive COVID test the date they were there. The admins will login using Firebase and then have the ability to create custom questions to be added to the form.
+
 ## Running the application (with Docker)
 
 1. Run `sh bin/install.sh` to install dependencies
